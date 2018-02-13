@@ -64,11 +64,11 @@ def sent(request):
         try:
             obj = Messages(comment=message1,created_by=name,otp=data[6])
             # generate account,token,from from twilio by creating an Account
-            account = "AC91181e65d2816679dd9b9844077c2130"
-            token = "3db543428e41ccc03ce5a18455e9fa02"
+            account = "#############################"
+            token = ""#############################"
             client = Client(account, token)
             # replace the number in to field with the number of the user.
-            message = client.messages.create(to="+918882383607",
+            message = client.messages.create(to="+91##########",
                                                  from_="+14798884127 ",
             body=message1)
             obj.save()
