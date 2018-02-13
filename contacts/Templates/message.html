@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Send Message</title>
+        {% load staticfiles %}
+    <script src="{% static 'jquery-3.2.1.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap-theme.min.css' %}">
+    <script src="{% static 'bootstrap.min.js' %}"></script>
+    <style>
+        .bread {color: #337ab7; text-decoration: none; background-color: transparent;border: none;}
+    </style>
+</head>
+<body>
+<!--{% if obj %}-->
+<!--{% for k in obj %}-->
+<!--<div>{{k.number}}</div>-->
+<!--<textarea>Hi {{k.first_name}} Your OTP is: 123456</textarea>-->
+<!--<button onclick="window.location='{% url 'sendMessage' k.id %}'">Send Message</button>-->
+<!--{% endfor %}-->
+<!--{% endif %}-->
+{% for k in obj %}
+<ol class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li><button class="bread" onclick="window.location='{% url 'detail' k.id %}'">Contact Info</a href="javascript:void"></li>
+  <li class="active">Send Message</li>
+</ol>
+{% endfor %}
+{% if obj %}
+{% for k in obj %}
+<div class="container">
+    <h2>Send Message</h2>
+    <form action="{% url 'sent' %}" method='post'>
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="message">Comment:</label>
+            <textarea name="message" type="text" class="form-control" rows="5" id="message" required>Hi {{k.first_name}} {{k.last_name}}, Your OTP is: {{k.ran_num}}</textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Send Message</button>
+    </form>
+</div>
+{% endfor %}
+{% endif %}
+</body>
+</html>
